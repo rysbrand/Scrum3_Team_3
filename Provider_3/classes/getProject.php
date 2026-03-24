@@ -59,9 +59,9 @@ $result = $db->displayRecords("projects");
                     <input type="hidden" name="id" value="<?php echo $data['project_id']; ?>">
                     <input type="hidden" name="column_name" value="project">
                     <input type="submit" value="Update">
-                </form>
-                <form action="delete.php" method="POST" style="display:inline;">
-                    <input type="hidden" name="id" value="<?php echo $data['project_id']; ?>">
+                </form> 
+                <form action="../API_3/delete.php" method="POST" style="display:inline;"> <!--I changed the route as it was wrong for delete.php -->
+                    <input type="hidden" name="id" value="<?php echo $data['project_id']; ?>"> 
                     <input type="hidden" name="column_name" value="project">
                     <input type="submit" value="Delete">
                 </form>

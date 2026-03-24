@@ -80,28 +80,22 @@ function createProject()
 
 
 
-function delete() {
+function delete($id, $column_name) {
 
-    if($_POST) {
-
-	$id = $_POST['id'];
-    $column_name = $_POST['column_name']; // Make sure this is not the plural version
-    $column_id_name = $column_name . '_id'; // For the where clause
-    $column_FROM = $column_name . 's'; // For the from clause
-    $sql = "DELETE FROM {$column_FROM} WHERE {$column_id_name} = {$id}"; // I have no idea if this works test pls
+    $id_name = $column_name . '_id'; // For the where clause
+    $table_name = $column_name . 's'; // For the from clause
+    $sql = "DELETE FROM {$table_name} WHERE {$id_name} = {$id}"; // I have no idea if this works test pls
 
 	$db = new DB_Access();
 	$connect = $db->connectTo();
-	//$sql = "DELETE FROM users WHERE id = {$id}";
 	if($connect->query($sql) === TRUE) {
 		echo "<p>Project Successfully removed!!</p>";
-		echo "<a href='../Testers/index.php'><button type='button'>Back</button></a>";
+		echo "<a href='../../Client_3/index.html'><button type='button'>Back</button></a>";
 	} else {
 		echo "Error updating record : " . $connect->error;
 	}
 
 	$connect->close();
-}
 }
 
 function updateUser() {
