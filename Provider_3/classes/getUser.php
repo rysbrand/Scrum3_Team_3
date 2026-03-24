@@ -34,6 +34,9 @@ $result = $db->displayRecords("users");
         <div class="page-header">
             <h2>Users</h2>
         </div>
+        <a href="createUser.php">
+            <button type="button">Create User</button>
+        </a>
 
         <table>
     <tr>
