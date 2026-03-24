@@ -62,7 +62,7 @@ $result = $db->displayRecords("tasks");
                     <input type="hidden" name="column_name" value="task">
                     <input type="submit" value="Update">
                 </form>
-                <form action="delete.php" method="POST" style="display:inline;">
+                <form action="../API_3/delete.php" method="POST" style="display:inline;">
                     <input type="hidden" name="id" value="<?php echo $data['task_id']; ?>">
                     <input type="hidden" name="column_name" value="task">
                     <input type="submit" value="Delete">
