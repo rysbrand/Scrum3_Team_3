@@ -1,23 +1,10 @@
 <?php
 require_once '../API_3/class_lib/db_connect.php';
 
-if (isset($_GET['project_id'])) {
-    $id = $_GET['project_id'];
-
-    $sql = "SELECT * FROM projects";
-    $result = $connect->query($sql);
-
-    if ($result->num_rows > 0) {
-        $data = $result->fetch_assoc();
-    } else {
-        echo "No records found.";
-        exit();
-    }
-} else {
-    echo "Invalid request.";
-    exit();
-}
+$db = new DB_Access();
+$result = $db->displayRecords("projects");
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,7 +12,7 @@ if (isset($_GET['project_id'])) {
     <title>Projects View</title>
     <style type="text/css">
         .wrapper {
-            width: 650px;
+            width: 800px;
             margin: 0 auto;
         }
         .page-header h2 {
@@ -51,32 +38,37 @@ if (isset($_GET['project_id'])) {
         <table>
             <tr>
                 <th>Project Name</th>
-                <td><?php echo $data['project_name']; ?></td>
-            </tr>
-            <tr>
-                <th>Project Category</th>
-                <td><?php echo $data['category']; ?></td>
-            </tr>
-            <tr>
-                <th>Project Status</th>
-                <td><?php echo $data['status']; ?></td>
-            </tr>
-            <tr>
-                <th>Project Due Date</th>
-                <td><?php echo $data['due_date']; ?></td>
-            </tr>
-            <tr>
+                <th>Category</th>
+                <th>Status</th>
+                <th>Due Date</th>
                 <th>Action</th>
-                <td>
-                    <a href="update.php?id=<?php echo $data['id']; ?>">Update Project</a>
-                    <a href="delete.php?id=<?php echo $data['id']; ?>">Delete</a>
-                    <a href="Scrum3_Team_3/Client_3/index.html">Back</a>
-                </td>
             </tr>
+
+            <?php
+            if ($result && mysqli_num_rows($result) > 0) {
+                while ($data = mysqli_fetch_assoc($result)) {
+                    echo "<td>" . $data['project_name'] . "</td>";
+                    echo "<td>" . $data['category'] . "</td>";
+                    echo "<td>" . $data['status'] . "</td>";
+                    echo "<td>" . $data['due_date'] . "</td>";
+                    // echo "<td>
+                    //         <a href='update.php?id=" . $data['id'] . "'>Update</a> |
+                    //         <a href='delete.php?id=" . $data['id'] . "'>Delete</a>
+                    //       </td>";
+                    echo "</tr>";
+                }
+            } else {
+                echo "<tr><td colspan='6'>No projects found.</td></tr>";
+            }
+            ?>
         </table>
+
+        <br>
+        <a href="Scrum3_Team_3/Client_3/index.html">Back</a>
     </div>
 </body>
 </html>
+
 <?php
-$connect->close();
+$db->closeConnection();
 ?>

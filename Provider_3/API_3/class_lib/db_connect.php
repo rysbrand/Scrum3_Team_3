@@ -6,21 +6,42 @@ class DB_Access
     private static $databaseName = "study_service";
     private static $userName = "root";
     private static $password = "";
+    private static $conn;
 
-   public function connectTo()
-	{
-		$conn = new mysqli(
-			self::$hostName,
-			self::$userName,
-			self::$password,
-			self::$databaseName
-		);
+    public function connectTo()
+    {
+        self::$conn = new mysqli(
+            self::$hostName,
+            self::$userName,
+            self::$password,
+            self::$databaseName
+        );
 
-		if ($conn->connect_error) {
-			die("Connection failed: " . $conn->connect_error);
-		}
+        if (self::$conn->connect_error) {
+            die("Connection failed: " . self::$conn->connect_error);
+        }
 
-		return $conn;
-	}
+        return self::$conn;
+    }
+
+    public function displayRecords($tableName)
+    {
+        if (!self::$conn) {
+            $this->connectTo();
+        }
+
+        $query = "SELECT * FROM $tableName";
+        $result = mysqli_query(self::$conn, $query);
+
+        return $result;
+    }
+
+    public function closeConnection()
+    {
+        if (self::$conn) {
+            self::$conn->close();
+            self::$conn = null;
+        }
+    }
 }
 ?>
