@@ -2,7 +2,7 @@
 require_once '../API_3/class_lib/db_connect.php';
 
 $db = new DB_Access();
-$result = $db->displayRecords("projects");
+$result = $db->displayRecords("users");
 ?>
 
 <!DOCTYPE html>
@@ -32,15 +32,15 @@ $result = $db->displayRecords("projects");
 <body>
     <div class="wrapper">
         <div class="page-header">
-            <h2>Projects</h2>
+            <h2>Users</h2>
         </div>
 
         <table>
     <tr>
-        <th>Project Name</th>
-        <th>Category</th>
-        <th>Status</th>
-        <th>Due Date</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Role</th>
         <th>Action</th>
     </tr>
 
@@ -48,20 +48,20 @@ $result = $db->displayRecords("projects");
     if ($result && mysqli_num_rows($result) > 0) {
         while ($data = mysqli_fetch_assoc($result)) {
             echo "<tr>";
-            echo "<td>" . $data['project_name'] . "</td>";
-            echo "<td>" . $data['category'] . "</td>";
-            echo "<td>" . $data['status'] . "</td>";
-            echo "<td>" . $data['due_date'] . "</td>";
+            echo "<td>" . $data['first_name'] . "</td>";
+            echo "<td>" . $data['last_name'] . "</td>";
+            echo "<td>" . $data['email'] . "</td>";
+            echo "<td>" . $data['role'] . "</td>";
             echo "<td>";
             ?>
             <!-- DO NOT TEST DELETE OR UPDATE BUTTON YET -->
                 <form action="update.php" method="POST" style="display:inline;">
-                    <input type="hidden" name="id" value="<?php echo $data['project_id']; ?>">
+                    <input type="hidden" name="id" value="<?php echo $data['user_id']; ?>">
                     <input type="hidden" name="column_name" value="project">
                     <input type="submit" value="Update">
                 </form>
                 <form action="delete.php" method="POST" style="display:inline;">
-                    <input type="hidden" name="id" value="<?php echo $data['project_id']; ?>">
+                    <input type="hidden" name="id" value="<?php echo $data['user_id']; ?>">
                     <input type="hidden" name="column_name" value="project">
                     <input type="submit" value="Delete">
                 </form>
@@ -70,7 +70,7 @@ $result = $db->displayRecords("projects");
             echo "</tr>";
         }
     } else {
-        echo "<tr><td colspan='5'>No projects found.</td></tr>";
+        echo "<tr><td colspan='5'>No users found.</td></tr>";
     }
     ?>
     </table>
