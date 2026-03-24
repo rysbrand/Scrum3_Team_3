@@ -36,32 +36,44 @@ $result = $db->displayRecords("projects");
         </div>
 
         <table>
-            <tr>
-                <th>Project Name</th>
-                <th>Category</th>
-                <th>Status</th>
-                <th>Due Date</th>
-                <th>Action</th>
-            </tr>
+    <tr>
+        <th>Project Name</th>
+        <th>Category</th>
+        <th>Status</th>
+        <th>Due Date</th>
+        <th>Action</th>
+    </tr>
 
-            <?php
-            if ($result && mysqli_num_rows($result) > 0) {
-                while ($data = mysqli_fetch_assoc($result)) {
-                    echo "<td>" . $data['project_name'] . "</td>";
-                    echo "<td>" . $data['category'] . "</td>";
-                    echo "<td>" . $data['status'] . "</td>";
-                    echo "<td>" . $data['due_date'] . "</td>";
-                    // echo "<td>
-                    //         <a href='update.php?id=" . $data['id'] . "'>Update</a> |
-                    //         <a href='delete.php?id=" . $data['id'] . "'>Delete</a>
-                    //       </td>";
-                    echo "</tr>";
-                }
-            } else {
-                echo "<tr><td colspan='6'>No projects found.</td></tr>";
-            }
+    <?php
+    if ($result && mysqli_num_rows($result) > 0) {
+        while ($data = mysqli_fetch_assoc($result)) {
+            echo "<tr>";
+            echo "<td>" . $data['project_name'] . "</td>";
+            echo "<td>" . $data['category'] . "</td>";
+            echo "<td>" . $data['status'] . "</td>";
+            echo "<td>" . $data['due_date'] . "</td>";
+            echo "<td>";
             ?>
-        </table>
+            <!-- DO NOT TEST DELETE OR UPDATE BUTTON YET -->
+                <form action="update.php" method="POST" style="display:inline;">
+                    <input type="hidden" name="project_id" value="<?php echo $data['project_id']; ?>">
+                    <input type="hidden" name="column_name" value="project">
+                    <input type="submit" value="Update">
+                </form>
+                <form action="delete.php" method="POST" style="display:inline;">
+                    <input type="hidden" name="project_id" value="<?php echo $data['project_id']; ?>">
+                    <input type="hidden" name="column_name" value="project">
+                    <input type="submit" value="Delete">
+                </form>
+            <?php
+            echo "</td>";
+            echo "</tr>";
+        }
+    } else {
+        echo "<tr><td colspan='5'>No projects found.</td></tr>";
+    }
+    ?>
+    </table>
 
         <br>
         <a href="../../Client_3/index.html">Back</a>
