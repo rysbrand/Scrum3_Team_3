@@ -182,16 +182,4 @@ function updateProject(){
  
 }
 }
-
-function getUsers() {
-
-}
-
-function getTasks() {
-
-}
-
-function getProjects() {
-
-}
 ?>

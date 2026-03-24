@@ -55,8 +55,8 @@ $result = $db->displayRecords("projects");
             echo "<td>";
             ?>
             <!-- DO NOT TEST DELETE OR UPDATE BUTTON YET -->
-                <form action="updateUser.php" method="POST" style="display:inline;">
-                    <input type="hidden" name="id" value="<?php echo $data['project_id']; ?>">
+                <form action="updateProject.php" method="GET" style="display:inline;">
+                    <input type="hidden" name="project_id" value="<?php echo $data['project_id']; ?>">
                     <input type="hidden" name="column_name" value="project">
                     <input type="submit" value="Update">
                 </form>
