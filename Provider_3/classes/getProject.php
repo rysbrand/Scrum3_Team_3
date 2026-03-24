@@ -64,7 +64,7 @@ $result = $db->displayRecords("projects");
         </table>
 
         <br>
-        <a href="Scrum3_Team_3/Client_3/index.html">Back</a>
+        <a href="../../Client_3/index.html">Back</a>
     </div>
 </body>
 </html>
