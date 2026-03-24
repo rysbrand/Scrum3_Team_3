@@ -77,6 +77,9 @@ function delete() {
     $column_id_name = $column_name . '_id'; // For the where clause
     $column_FROM = $column_name . 's'; // For the from clause
     $sql = "DELETE FROM {$column_FROM} WHERE {$column_id_name} = {$id}"; // I have no idea if this works test pls
+
+	$db = new DB_Access();
+	$connect = $db->connectTo();
 	//$sql = "DELETE FROM users WHERE id = {$id}";
 	if($connect->query($sql) === TRUE) {
 		echo "<p>Project Successfully removed!!</p>";
@@ -97,8 +100,11 @@ function updateUser() {
     $role = $_POST['role'];
  
     $id = $_POST['id'];
+	$db = new DB_Access();
+	$connect = $db->connectTo();
  
     $sql = "UPDATE users SET first_name = '$fname', last_name = '$lname', email = '$email', role = '$role' WHERE id = {$id}";
+	
     if($connect->query($sql) === TRUE) {
         echo "<p>Succcessfully Updated</p>";
         echo "<a href='../Testers/index.php'><button type='button'>Home</button></a>";
