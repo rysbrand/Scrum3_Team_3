@@ -4,6 +4,7 @@ require_once './../API_3/class_lib/db_connect.php';
 $db = new Db_Access();
 
 function createUser() {
+
     if($_POST) {
 	$first_name = $_POST['fname'];
 	$last_name = $_POST['lname'];
@@ -24,7 +25,19 @@ function createTask() {
 	$priority = $_POST['priority'];
     $due_date = $_POST['due'];
 
+	$db = new DB_Access();
+	$connect = $db->connectTo();
+
 	$sql = "INSERT INTO tasks (title, description, status, priority, due_date) VALUES ('$title', '$description', '$status', '$priority', '$due_date')";
+
+	if ($connect->query($sql) === TRUE) {
+            echo "<p>New project successfully created</p>";
+            echo "<a href='../Testers/index.php'><button type='button'>Home</button></a>";
+        } else {
+            echo "Error: " . $sql . " " . $connect->error;
+        }
+
+        $connect->close();
 }
 }
 
@@ -33,6 +46,7 @@ function createTask() {
 function createProject()
 {
     if ($_POST) {
+		$project_name = $_POST('project_name');
         $category = $_POST['category'];
         $status = $_POST['status'];
         $due_date = $_POST['due'];
@@ -40,8 +54,8 @@ function createProject()
         $db = new DB_Access();
         $connect = $db->connectTo();
 
-        $sql = "INSERT INTO projects (category, status, due_date)
-                VALUES ('$category', '$status', '$due_date')";
+        $sql = "INSERT INTO projects (project_name, category, status, due_date)
+                VALUES ('$project_name', '$category', '$status', '$due_date')";
 
         if ($connect->query($sql) === TRUE) {
             echo "<p>New project successfully created</p>";
@@ -57,12 +71,17 @@ function createProject()
 
 
 function delete() {
+
     if($_POST) {
+
 	$id = $_POST['id'];
-    $column_name = $_POST['table_name']; // Make sure this is not the plural version
+    $column_name = $_POST['column_name']; // Make sure this is not the plural version
     $column_id_name = $column_name . '_id'; // For the where clause
-    $column_FROM = $column . 's'; // For the from clause
+    $column_FROM = $column_name . 's'; // For the from clause
     $sql = "DELETE FROM {$column_FROM} WHERE {$column_id_name} = {$id}"; // I have no idea if this works test pls
+
+	$db = new DB_Access();
+	$connect = $db->connectTo();
 	//$sql = "DELETE FROM users WHERE id = {$id}";
 	if($connect->query($sql) === TRUE) {
 		echo "<p>Project Successfully removed!!</p>";
@@ -76,15 +95,72 @@ function delete() {
 }
 
 function updateUser() {
+
     if($_POST) {
+
     $fname = $_POST['fname'];
     $lname = $_POST['lname'];
     $email = $_POST['email'];
     $role = $_POST['role'];
  
-    $id = $_POST['id'];
+    $user_id = $_POST['user_id'];
+	$db = new DB_Access();
+	$connect = $db->connectTo();
  
-    $sql = "UPDATE users SET first_name = '$fname', last_name = '$lname', email = '$email', role = '$role' WHERE id = {$id}";
+    $sql = "UPDATE users SET first_name = '$fname', last_name = '$lname', email = '$email', role = '$role' WHERE user_id = {$user_id}";
+
+    if($connect->query($sql) === TRUE) {
+        echo "<p>Succcessfully Updated</p>";
+        echo "<a href='../Testers/index.php'><button type='button'>Home</button></a>";
+    } else {
+        echo "Erorr while updating record : ". $connect->error;
+    }
+ 
+    $connect->close();
+ 
+}
+}
+
+function updateTask() {
+	if($_POST) {
+
+    $title = $_POST['title'];
+    $description = $_POST['description'];
+    $status = $_POST['status'];
+    $priority = $_POST['priority'];
+ 	$task_id = $_POST['task_id'];
+
+	$db = new DB_Access();
+	$connect = $db->connectTo();
+ 
+    $sql = "UPDATE tasks SET title = '$title', description = '$description', status = '$status', priority = '$priority' WHERE task_id = {$task_id}";
+
+    if($connect->query($sql) === TRUE) {
+        echo "<p>Succcessfully Updated</p>";
+        echo "<a href='../Testers/index.php'><button type='button'>Home</button></a>";
+    } else {
+        echo "Erorr while updating record : ". $connect->error;
+    }
+ 
+    $connect->close();
+ 
+}
+}
+
+function updateProject(){
+	if($_POST) {
+
+    $project_name = $_POST['project_name'];
+    $category = $_POST['category'];
+    $status = $_POST['status'];
+    $due_date = $_POST['due_date'];
+ 	$project_id = $_POST['project_id'];
+
+	$db = new DB_Access();
+	$connect = $db->connectTo();
+ 
+    $sql = "UPDATE projects SET project_name = '$project_name', category = '$category', status = '$status', due_date = '$due_date' WHERE project_id = {$project_id}";
+
     if($connect->query($sql) === TRUE) {
         echo "<p>Succcessfully Updated</p>";
         echo "<a href='../Testers/index.php'><button type='button'>Home</button></a>";
