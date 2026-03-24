@@ -22,7 +22,7 @@ CREATE TABLE projects (
     due_date DATE NOT NULL,
     owner_user_id INT NOT NULL,
     created_at DATETIME NOT NULL,
-    CONSTRAINT fk_projects_owner FOREIGN KEY (owner_user_id) REFERENCES users(user_id)
+    CONSTRAINT fk_projects_owner FOREIGN KEY (owner_user_id) REFERENCES users(user_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE tasks (
@@ -34,8 +34,8 @@ CREATE TABLE tasks (
     status VARCHAR(40) NOT NULL,
     priority VARCHAR(20) NOT NULL,
     due_date DATE NOT NULL,
-    CONSTRAINT fk_tasks_project FOREIGN KEY (project_id) REFERENCES projects(project_id),
-    CONSTRAINT fk_tasks_user FOREIGN KEY (assigned_user_id) REFERENCES users(user_id)
+    CONSTRAINT fk_tasks_project FOREIGN KEY (project_id) REFERENCES projects(project_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_tasks_user FOREIGN KEY (assigned_user_id) REFERENCES users(user_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 INSERT INTO users (first_name, last_name, email, role, created_at) VALUES
