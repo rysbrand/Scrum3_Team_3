@@ -5,13 +5,13 @@ require_once 'CRUD.php';
 $db = new DB_Access();
 $connect = $db->connectTo();
 
-if ($_POST) {
+if (isset($_POST['updateUser'])) {
     updateUser();
     exit();
 }
 
-if (isset($_GET['id'])) {
-    $id = $_GET['id'];
+if (isset($_GET['user_id'])) {
+    $id = $_GET['user_id'];
     $sql = "SELECT * FROM users WHERE user_id = $id";
     $result = $connect->query($sql);
     $data = $result->fetch_assoc();
@@ -44,7 +44,7 @@ if (isset($_GET['id'])) {
         <label>Role:</label><br>
         <input type="text" name="role" value="<?php echo $data['role']; ?>"><br><br>
 
-        <input type="submit" value="Update User">
+        <input type="submit" name="updateUser" value="Update User">
     </form>
 </body>
 </html>

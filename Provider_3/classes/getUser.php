@@ -54,9 +54,9 @@ $result = $db->displayRecords("users");
             echo "<td>" . $data['role'] . "</td>";
             echo "<td>";
             ?>
-            <!-- DO NOT TEST DELETE OR UPDATE BUTTON YET -->
-                <form action="updateUser.php" method="POST" style="display:inline;">
-                    <input type="hidden" name="id" value="<?php echo $data['user_id']; ?>">
+            <!-- DO NOT TEST DELETE BUTTON YET -->
+                <form action="updateUser.php" method="GET" style="display:inline;">
+                    <input type="hidden" name="user_id" value="<?php echo $data['user_id']; ?>">
                     <input type="hidden" name="column_name" value="user">
                     <input type="submit" value="Update">
                 </form>
