@@ -100,10 +100,10 @@ function delete($id, $column_name) {
 
 function updateUser() {
 
-    if($_POST) {
+    if(isset($_POST['updateUser'])) {
 
-    $fname = $_POST['fname'];
-    $lname = $_POST['lname'];
+    $fname = $_POST['first_name'];
+    $lname = $_POST['last_name'];
     $email = $_POST['email'];
     $role = $_POST['role'];
  
@@ -115,7 +115,7 @@ function updateUser() {
 
     if($connect->query($sql) === TRUE) {
         echo "<p>Succcessfully Updated</p>";
-        echo "<a href='../Testers/index.php'><button type='button'>Home</button></a>";
+        echo "<a href='../../Client_3/index.html'><button type='button'>Home</button></a>";
     } else {
         echo "Erorr while updating record : ". $connect->error;
     }
@@ -126,7 +126,7 @@ function updateUser() {
 }
 
 function updateTask() {
-	if($_POST) {
+	if(isset($_POST['updateTask'])) {
 
     $title = $_POST['title'];
     $description = $_POST['description'];
@@ -141,7 +141,7 @@ function updateTask() {
 
     if($connect->query($sql) === TRUE) {
         echo "<p>Succcessfully Updated</p>";
-        echo "<a href='../Testers/index.php'><button type='button'>Home</button></a>";
+        echo "<a href='../../Client_3/index.html'><button type='button'>Home</button></a>";
     } else {
         echo "Erorr while updating record : ". $connect->error;
     }
@@ -167,7 +167,7 @@ function updateProject(){
 
     if($connect->query($sql) === TRUE) {
         echo "<p>Succcessfully Updated</p>";
-        echo "<a href='../Testers/index.php'><button type='button'>Home</button></a>";
+        echo "<a href='../../Client_3/index.html'><button type='button'>Home</button></a>";
     } else {
         echo "Erorr while updating record : ". $connect->error;
     }
@@ -175,17 +175,5 @@ function updateProject(){
     $connect->close();
  
 }
-}
-
-function getUsers() {
-
-}
-
-function getTasks() {
-
-}
-
-function getProjects() {
-
 }
 ?>

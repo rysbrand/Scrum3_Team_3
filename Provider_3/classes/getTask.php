@@ -56,9 +56,9 @@ $result = $db->displayRecords("tasks");
             echo "<td>" . $data['due_date'] . "</td>";
             echo "<td>";
             ?>
-            <!-- DO NOT TEST DELETE OR UPDATE BUTTON YET -->
-                <form action="update.php" method="POST" style="display:inline;">
-                    <input type="hidden" name="id" value="<?php echo $data['task_id']; ?>">
+            <!-- DO NOT TEST DELETE BUTTON YET -->
+                <form action="updateTask.php" method="GET" style="display:inline;">
+                    <input type="hidden" name="task_id" value="<?php echo $data['task_id']; ?>">
                     <input type="hidden" name="column_name" value="task">
                     <input type="submit" value="Update">
                 </form>
