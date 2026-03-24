@@ -24,7 +24,19 @@ function createTask() {
 	$priority = $_POST['priority'];
     $due_date = $_POST['due'];
 
+	$db = new DB_Access();
+	$connect = $db->connectTo();
+
 	$sql = "INSERT INTO tasks (title, description, status, priority, due_date) VALUES ('$title', '$description', '$status', '$priority', '$due_date')";
+
+	if ($connect->query($sql) === TRUE) {
+            echo "<p>New project successfully created</p>";
+            echo "<a href='../Testers/index.php'><button type='button'>Home</button></a>";
+        } else {
+            echo "Error: " . $sql . " " . $connect->error;
+        }
+
+        $connect->close();
 }
 }
 
@@ -57,11 +69,13 @@ function createProject()
 
 
 function delete() {
+
     if($_POST) {
+
 	$id = $_POST['id'];
     $column_name = $_POST['table_name']; // Make sure this is not the plural version
     $column_id_name = $column_name . '_id'; // For the where clause
-    $column_FROM = $column . 's'; // For the from clause
+    $column_FROM = $column_name . 's'; // For the from clause
     $sql = "DELETE FROM {$column_FROM} WHERE {$column_id_name} = {$id}"; // I have no idea if this works test pls
 	//$sql = "DELETE FROM users WHERE id = {$id}";
 	if($connect->query($sql) === TRUE) {
