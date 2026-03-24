@@ -1,5 +1,5 @@
 <?php
-require_once './../API_3/class_lib/db_connect.php';
+require_once '../API_3/class_lib/db_connect.php';
 
 function createUser() {
 
@@ -192,6 +192,6 @@ function getTasks() {
 }
 
 function getProjects() {
-	
+
 }
 ?>
