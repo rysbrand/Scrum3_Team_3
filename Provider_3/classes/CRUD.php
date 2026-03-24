@@ -108,8 +108,8 @@ function updateUser() {
 
     if($_POST) {
 
-    $fname = $_POST['fname'];
-    $lname = $_POST['lname'];
+    $fname = $_POST['first_name'];
+    $lname = $_POST['last_name'];
     $email = $_POST['email'];
     $role = $_POST['role'];
  
