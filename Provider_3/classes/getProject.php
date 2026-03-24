@@ -1,5 +1,5 @@
 <?php
-require_once 'db_connect.php';
+require_once '../API_3/class_lib/db_connect.php';
 
 if (isset($_GET['project_id'])) {
     $id = $_GET['project_id'];
