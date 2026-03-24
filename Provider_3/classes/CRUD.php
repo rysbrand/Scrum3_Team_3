@@ -1,8 +1,6 @@
 <?php
 require_once './../API_3/class_lib/db_connect.php';
 
-$db = new Db_Access();
-
 function createUser() {
 
     if($_POST) {
@@ -11,9 +9,21 @@ function createUser() {
 	$email = $_POST['email'];
 	$role = $_POST['role'];
 
+	$db = new DB_Access();
+	$connect = $db->connectTo();
+
 
 	$sql = "INSERT INTO users (fname, lname, email, role) VALUES ('$first_name', '$last_name', '$email', '$role')";
-	}
+
+	if ($connect->query($sql) === TRUE) {
+            echo "<p>New project successfully created</p>";
+            echo "<a href='../Testers/index.php'><button type='button'>Home</button></a>";
+        } else {
+            echo "Error: " . $sql . " " . $connect->error;
+        }
+
+        $connect->close();
+}
 }
 
 function createTask() {
@@ -171,5 +181,17 @@ function updateProject(){
     $connect->close();
  
 }
+}
+
+function getUsers() {
+
+}
+
+function getTasks() {
+
+}
+
+function getProjects() {
+	
 }
 ?>
