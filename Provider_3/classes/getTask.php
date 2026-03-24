@@ -35,6 +35,10 @@ $result = $db->displayRecords("tasks");
             <h2>Tasks</h2>
         </div>
 
+        <a href="createTask.php">
+            <button type="button">Create Task</button>
+        </a>
+
         <table>
     <tr>
         <th>Task Title</th>

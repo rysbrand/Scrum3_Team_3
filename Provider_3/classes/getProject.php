@@ -34,6 +34,9 @@ $result = $db->displayRecords("projects");
         <div class="page-header">
             <h2>Projects</h2>
         </div>
+        <a href="createProject.php">
+            <button type="button">Create Project</button>
+        </a>
 
         <table>
     <tr>

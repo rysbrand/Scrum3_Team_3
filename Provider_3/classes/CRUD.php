@@ -4,8 +4,8 @@ require_once '../API_3/class_lib/db_connect.php';
 function createUser() {
 
     if($_POST) {
-	$first_name = $_POST['fname'];
-	$last_name = $_POST['lname'];
+	$first_name = $_POST['first_name'];
+	$last_name = $_POST['last_name'];
 	$email = $_POST['email'];
 	$role = $_POST['role'];
 
@@ -13,11 +13,11 @@ function createUser() {
 	$connect = $db->connectTo();
 
 
-	$sql = "INSERT INTO users (fname, lname, email, role) VALUES ('$first_name', '$last_name', '$email', '$role')";
+	$sql = "INSERT INTO users (first_name, last_name, email, role) VALUES ('$first_name', '$last_name', '$email', '$role')";
 
 	if ($connect->query($sql) === TRUE) {
             echo "<p>New project successfully created</p>";
-            echo "<a href='../Testers/index.php'><button type='button'>Home</button></a>";
+            echo "<a href='../../Client_3/index.html'><button type='button'>Home</button></a>";
         } else {
             echo "Error: " . $sql . " " . $connect->error;
         }
@@ -29,20 +29,23 @@ function createUser() {
 function createTask() {
 
     if($_POST) {
+    
+    $project_id = $_POST['project_id'];
+    $assigned_user_id = $_POST['assigned_user_id'];
 	$title = $_POST['title'];
 	$description = $_POST['description'];
 	$status = $_POST['status'];
 	$priority = $_POST['priority'];
-    $due_date = $_POST['due'];
+    $due_date = $_POST['due_date'];
 
 	$db = new DB_Access();
 	$connect = $db->connectTo();
 
-	$sql = "INSERT INTO tasks (title, description, status, priority, due_date) VALUES ('$title', '$description', '$status', '$priority', '$due_date')";
+	$sql = "INSERT INTO tasks (project_id, assigned_user_id, title, description, status, priority, due_date) VALUES ('$project_id', '$assigned_user_id', '$title', '$description', '$status', '$priority', '$due_date')";
 
 	if ($connect->query($sql) === TRUE) {
             echo "<p>New project successfully created</p>";
-            echo "<a href='../Testers/index.php'><button type='button'>Home</button></a>";
+            echo "<a href='../../Client_3/index.html'><button type='button'>Home</button></a>";
         } else {
             echo "Error: " . $sql . " " . $connect->error;
         }
@@ -56,20 +59,21 @@ function createTask() {
 function createProject()
 {
     if ($_POST) {
-		$project_name = $_POST('project_name');
+		$project_name = $_POST['project_name'];
         $category = $_POST['category'];
         $status = $_POST['status'];
-        $due_date = $_POST['due'];
+        $due_date = $_POST['due_date'];
+        $owner = $_POST['owner_user_id'];
 
         $db = new DB_Access();
         $connect = $db->connectTo();
 
-        $sql = "INSERT INTO projects (project_name, category, status, due_date)
-                VALUES ('$project_name', '$category', '$status', '$due_date')";
+        $sql = "INSERT INTO projects (project_name, category, status, due_date,owner_user_id)
+                VALUES ('$project_name', '$category', '$status', '$due_date', '$owner')";
 
         if ($connect->query($sql) === TRUE) {
             echo "<p>New project successfully created</p>";
-            echo "<a href='../Testers/index.php'><button type='button'>Home</button></a>";
+            echo "<a href='../../Client_3/index.html'><button type='button'>Home</button></a>";
         } else {
             echo "Error: " . $sql . " " . $connect->error;
         }
