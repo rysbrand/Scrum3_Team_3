@@ -16,7 +16,7 @@ if (isset($_POST['createProject'])) {
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Update Project</title>
+    <title>Create Project</title>
 </head>
 <body>
     <h2>Update Project</h2>
